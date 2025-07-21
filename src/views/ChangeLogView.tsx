@@ -14,7 +14,7 @@ export default function ChangeLogView() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get("http://localhost:4000/api/changelog") // Cambia la URL según tu backend
+    axios.get(import.meta.env.VITE_API_URL + "/api/changelog") // Cambia la URL según tu backend
       .then(res => {
         setLogs(res.data);
         setLoading(false);
