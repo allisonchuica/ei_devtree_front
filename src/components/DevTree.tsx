@@ -49,7 +49,7 @@ export default function DevTree({ data }: DevTreeProps) {
             <HeaderAdmin/>
     <div className="bg-gradient-to-br from-gray-100 via-white to-gray-200 min-h-screen py-10">
     <main className="mx-auto max-w-5xl p-10 md:p-0">
-        <NavigationTabs className="mb-8 border-b border-gray-300" />
+        <NavigationTabs />
     <div className="flex justify-end pr-10">
     <Link
         to={`/${data.handle}`}

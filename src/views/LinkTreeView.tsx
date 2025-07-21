@@ -5,7 +5,7 @@ import DevTreeInput from "../components/DevTreeInput"
 import { isValidUrl } from "../utils"
 import { toast } from "sonner"
 import { updateProfile } from "../api/DevTreeAPI"
-import { SocialNetwork, User } from "../types"
+import { DevTreeLink, SocialNetwork, User } from "../types"
 
 export default function LinkTreeView() {
   const [devTreeLinks, setDevTreeLinks] = useState(social)
@@ -56,7 +56,7 @@ export default function LinkTreeView() {
 
     setDevTreeLinks(updatedLinks)
 
-    let updatedItems: SocialNetwork[] = []
+    let updatedItems: DevTreeLink[] = []
     const selectedSocialNetwork = updatedLinks.find(link => link.name === socialNetwork)
     if(selectedSocialNetwork?.enabled) {
       const id = links.filter(link => link.id).length + 1
