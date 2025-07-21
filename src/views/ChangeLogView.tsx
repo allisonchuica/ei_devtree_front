@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useQueryClient} from '@tanstack/react-query'
+import { User } from '../types'
 
 interface ChangeLog {
   _id: string;
@@ -12,17 +14,23 @@ interface ChangeLog {
 export default function ChangeLogView() {
   const [logs, setLogs] = useState<ChangeLog[]>([]);
   const [loading, setLoading] = useState(true);
+  const queryClient = useQueryClient()
+  const data : User = queryClient.getQueryData(['user'])!
 
-  useEffect(() => {
-    axios.get(import.meta.env.VITE_API_URL + "/api/changelog") // Cambia la URL según tu backend
-      .then(res => {
-        setLogs(res.data);
-        setLoading(false);
-      })
-      .catch(() => {
-        setLoading(false);
-      });
-  }, []);
+useEffect(() => {
+  const userId = data.handle;
+
+  axios.get(import.meta.env.VITE_API_URL + "/api/changelog", {
+    params: { userId }
+  })
+  .then(res => {
+    setLogs(res.data);
+    setLoading(false);
+  })
+  .catch(() => {
+    setLoading(false);
+  });
+}, []);
 
   return (
     <div className="bg-white shadow-md rounded-lg p-6 max-w-6xl mx-auto mt-10">
